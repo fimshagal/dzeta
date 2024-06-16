@@ -12,15 +12,14 @@ const zetaStore: ZetaStore = {
     initLength: 5,
     currentPower: 0,
     currentLength: 0,
-    el$: {},
-    el$Names: ['inputPower', 'outputSequence', 'outputSum', 'inputLength', 'buttonExe'],
+    el$: {
+        inputPower: document.getElementById('inputPower'),
+        outputSequence: document.getElementById('outputSequence'),
+        outputSum: document.getElementById('outputSum'),
+        inputLength: document.getElementById('inputLength'),
+        buttonExe: document.getElementById('buttonExe'),
+    },
     memy: new Memy(),
-};
-
-const defineEl$ = (): void => {
-    for (const name of zetaStore.el$Names) {
-        zetaStore.el$[name] = document.getElementById(name);
-    }
 };
 
 const handleOnChangeInputPower = (event: Event): void => {
@@ -186,7 +185,6 @@ const getSequenceFractionHtml = (fraction: ZetaSequenceFraction): string => {
 };
 
 export const exeZetaFn = (): void => {
-    defineEl$();
     setCurrentValuesByDefault();
     setupInputs();
     setupButtons();

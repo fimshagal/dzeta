@@ -19,7 +19,6 @@ export interface ZetaStore {
     currentPower: number;
     currentLength: number;
     el$: El$;
-    el$Names: El$Names;
     memy: Memy;
 }
 
