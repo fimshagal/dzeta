@@ -11,7 +11,7 @@ export const sumZetaSequence = (sequence: ZetaSequenceElement[]): Big.Big => {
     let response: Big.Big = new Big(0);
 
     for (const sequenceItem of sequence) {
-        const handledValue: number | Big.Big = isNumber(sequenceItem)
+        const handledValue: Big.Big = isNumber(sequenceItem)
             ? new Big(sequenceItem as number)
             : calcZetaFraction(sequenceItem as ZetaSequenceFraction);
 

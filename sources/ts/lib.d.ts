@@ -1,4 +1,5 @@
-import {Dictionary, Nullable} from "./utils";
+import { Dictionary, Nullable } from "./utils";
+import {Memy} from "./memy";
 
 export interface ZetaSequenceFraction {
     numerator: number;
@@ -11,6 +12,19 @@ export interface GetZetaSequenceDataOptions {
     plainSequenceResponse?: boolean;
 }
 
+export interface ZetaStore {
+    maxSequenceLength: number;
+    initPower: number;
+    initLength: number;
+    currentPower: number;
+    currentLength: number;
+    el$: El$;
+    el$Names: El$Names;
+    memy: Memy;
+}
+
 export type ZetaSequenceElement = ZetaSequenceFraction | number;
 
 export type El$ = Dictionary<Nullable<HTMLElement>>;
+
+export type El$Names = ['inputPower', 'outputSequence', 'outputSum', 'inputLength', 'buttonExe'];
