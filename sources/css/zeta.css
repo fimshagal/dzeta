@@ -72,3 +72,12 @@
 .label {
     font-weight: bold;
 }
+
+.title {
+    font-weight: bold;
+}
+
+.title-output-sequence .zeta-fn-argument {
+    font-weight: normal;
+    font-size: 1em;
+}

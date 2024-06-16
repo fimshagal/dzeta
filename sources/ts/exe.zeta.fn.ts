@@ -34,7 +34,7 @@ const handleOnChangeInputPower = (event: Event): void => {
     const parsedValue: number = Number(value);
 
     if (isNaN(parsedValue)) {
-        inputPower.value = `${zetaStore.currentPower}`;
+        setInputValue(inputPower, zetaStore.currentPower);
         return;
     }
 
@@ -43,7 +43,7 @@ const handleOnChangeInputPower = (event: Event): void => {
     zetaStore.currentPower = isValueOutOfReal ? 1 : parsedValue;
 
     if (isValueOutOfReal) {
-        inputPower.value = `${zetaStore.currentPower}`;
+        setInputValue(inputPower, zetaStore.currentPower);
     }
 };
 
@@ -53,7 +53,8 @@ const handleOnBlurInputPower = (event: Event): void => {
     const value: string = inputPower.value;
 
     if (value.trim()) return;
-    inputPower.value = `${zetaStore.currentPower}`;
+
+    setInputValue(inputPower, zetaStore.currentPower);
 };
 
 const handleOnChangeInputLength = (event: Event): void => {
@@ -68,7 +69,7 @@ const handleOnChangeInputLength = (event: Event): void => {
     let parsedValue: number = Number(value);
 
     if (isNaN(parsedValue)) {
-        inputLength.value = `${zetaStore.currentLength}`;
+        setInputValue(inputLength, zetaStore.currentLength);
         return;
     }
 
@@ -77,7 +78,7 @@ const handleOnChangeInputLength = (event: Event): void => {
     zetaStore.currentLength = isValueReachedLimit ? zetaStore.maxSequenceLength : parsedValue;
 
     if (isValueReachedLimit) {
-        inputLength.value = `${zetaStore.currentLength}`;
+        setInputValue(inputLength, zetaStore.currentLength);
     }
 };
 
@@ -87,7 +88,7 @@ const handleOnBlurInputLength = (event: Event): void => {
     const value: string = inputPower.value;
 
     if (value.trim()) return;
-    inputPower.value = `${zetaStore.currentLength}`;
+    setInputValue(inputPower, zetaStore.currentLength);
 };
 
 const handleOnClickButtonExe = (event: Event): void => {
@@ -100,6 +101,7 @@ const handleZeta = (zeta: number, length: number): void => {
 
     const sequence: ZetaSequenceElement[] = getZetaSequenceData(zeta, length);
     const memyEntry: Nullable<MemyEntry> | undefined = zetaStore.memy.getEntry([zeta, length]);
+    console.log(memyEntry);
     const sum: Big.Big = memyEntry
         ? new Big(Number(memyEntry.values[0]))
         : sumZetaSequence(sequence);
@@ -113,9 +115,13 @@ const handleZeta = (zeta: number, length: number): void => {
 };
 
 const setupInput = (el: HTMLInputElement, initValue: number, handlerOnInput: (event: Event) => void, handlerOnBlur: (event: Event) => void ): void => {
-    el.value = `${initValue}`;
+    setInputValue(el, initValue);
     el.addEventListener("input", handlerOnInput);
     el.addEventListener("blur", handlerOnBlur);
+};
+
+const setInputValue = (el: HTMLInputElement, value: number): void => {
+    el.value = `${value}`;
 };
 
 const setupInputs = (): void => {
@@ -133,13 +139,15 @@ const setupInputs = (): void => {
     );
 };
 
-const setupButtonExe = (): void => {
-    const buttonExe: Nullable<HTMLButtonElement> = zetaStore.el$.buttonExe as Nullable<HTMLButtonElement>;
-    buttonExe?.addEventListener('click', handleOnClickButtonExe);
+const setupButton = (el: HTMLButtonElement, handlerOnClick: (event: Event) => void): void => {
+    el.addEventListener('click', handlerOnClick);
 };
 
 const setupButtons = (): void => {
-    setupButtonExe();
+    setupButton(
+        zetaStore.el$.buttonExe as HTMLButtonElement,
+        handleOnClickButtonExe,
+    );
 };
 
 const setCurrentValuesByDefault = (): void => {
@@ -154,7 +162,7 @@ const outputSum = (value: Big.Big): void => {
 const outputSequence = (sequence: ZetaSequenceElement[]): void => {
     const outputSequence: Nullable<HTMLOutputElement> = zetaStore.el$.outputSequence as Nullable<HTMLOutputElement>;
 
-    outputSequence!.innerHTML = `<span>ζ(${zetaStore.currentPower})</span> => `;
+    outputSequence!.innerHTML = getOutputSequenceHtml(zetaStore.currentPower);
 
     let html: string = '';
     let iterationCounter: number = 0;
@@ -169,6 +177,8 @@ const outputSequence = (sequence: ZetaSequenceElement[]): void => {
     }
     outputSequence!.innerHTML += '+ ...';
 };
+
+const getOutputSequenceHtml = (value: number): string => `<span class="title title-output-sequence">ζ(${value}) ⇒</span> `;
 
 const getSequenceNumberHtml = (value: ZetaSequenceElement): string => `<span class="sequence-number">${value}</span>`;
 
