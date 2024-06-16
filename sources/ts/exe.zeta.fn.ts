@@ -39,7 +39,13 @@ const handleOnChangeInputPower = (event: Event): void => {
         return;
     }
 
-    zetaStore.currentPower = parsedValue;
+    const isValueOutOfReal: boolean = parsedValue <= 0;
+
+    zetaStore.currentPower = isValueOutOfReal ? 1 : parsedValue;
+
+    if (isValueOutOfReal) {
+        inputPower.value = `${zetaStore.currentPower}`;
+    }
 };
 
 const handleOnBlurInputPower = (event: Event): void => {
@@ -107,23 +113,25 @@ const handleZeta = (zeta: number, length: number): void => {
     }
 };
 
-const setupInputPower = (): void => {
-    const inputPower: Nullable<HTMLInputElement> = zetaStore.el$.inputPower as Nullable<HTMLInputElement>;
-    inputPower!.value = `${zetaStore.currentPower}`;
-    inputPower?.addEventListener("input", handleOnChangeInputPower);
-    inputPower?.addEventListener("blur", handleOnBlurInputPower);
-};
-
-const setupInputLength = (): void => {
-    const inputLength: Nullable<HTMLInputElement> = zetaStore.el$.inputLength as Nullable<HTMLInputElement>;
-    inputLength!.value = `${zetaStore.currentLength}`;
-    inputLength?.addEventListener("input", handleOnChangeInputLength);
-    inputLength?.addEventListener("blur", handleOnBlurInputLength);
+const setupInput = (el: HTMLInputElement, initValue: number, handlerOnInput: (event: Event) => void, handlerOnBlur: (event: Event) => void ): void => {
+    el.value = `${initValue}`;
+    el.addEventListener("input", handlerOnInput);
+    el.addEventListener("blur", handlerOnBlur);
 };
 
 const setupInputs = (): void => {
-    setupInputPower();
-    setupInputLength();
+    setupInput(
+        zetaStore.el$.inputPower as HTMLInputElement,
+        zetaStore.currentPower,
+        handleOnChangeInputPower,
+        handleOnBlurInputPower,
+    );
+    setupInput(
+        zetaStore.el$.inputLength as HTMLInputElement,
+        zetaStore.currentLength,
+        handleOnChangeInputLength,
+        handleOnBlurInputLength,
+    );
 };
 
 const setupButtonExe = (): void => {

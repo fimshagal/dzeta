@@ -19,6 +19,7 @@ export class Memy implements IMemy {
 
         const entry: MemyEntry = new MemyEntry(triggers, values);
         this._entries[entry.triggersKey] = entry;
+
         return this;
     }
 
