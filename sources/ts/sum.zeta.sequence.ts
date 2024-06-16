@@ -1,17 +1,22 @@
 import { ZetaSequenceElement, ZetaSequenceFraction } from "./lib";
 import { calcZetaFraction } from "./calc.fraction";
 import { isNumber } from "./utils";
+import Big from "big.js";
 
-export const sumZetaSequence = (sequence: ZetaSequenceElement[]): number => {
+export const sumZetaSequence = (sequence: ZetaSequenceElement[]): Big.Big => {
     if (!sequence || !sequence.length) {
         throw Error("Sequence either is empty or absent");
     }
 
-    return sequence.reduce((sum: number, currentValue: ZetaSequenceElement): number => {
-        currentValue = isNumber(currentValue)
-            ? currentValue as number
-            : calcZetaFraction(currentValue as ZetaSequenceFraction);
+    let response: Big.Big = new Big(0);
 
-        return sum + currentValue;
-    }, 0);
+    for (const sequenceItem of sequence) {
+        const handledValue: number | Big.Big = isNumber(sequenceItem)
+            ? new Big(sequenceItem as number)
+            : calcZetaFraction(sequenceItem as ZetaSequenceFraction);
+
+        response = response.add(handledValue);
+    }
+
+    return response;
 };

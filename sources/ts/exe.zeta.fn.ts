@@ -4,6 +4,7 @@ import { ZetaSequenceElement } from "./lib";
 import { getZetaSequenceData } from "./get.zeta.sequence.data";
 import {sumZetaSequence} from "./sum.zeta.sequence";
 import {calcZetaFraction} from "./calc.fraction";
+import Big from "big.js";
 
 const maxSequenceLength: number = 500;
 const initPower: number = 2;
@@ -127,8 +128,8 @@ const setCurrentValuesByDefault = (): void => {
     currentLength = initLength;
 };
 
-const outputSum = (value: number): void => {
-    el$.outputSum!.innerText = `Sum: ${value}`;
+const outputSum = (value: Big.Big): void => {
+    el$.outputSum!.innerText = `Sum: ${value.toString()}`;
 };
 
 const outputSequence = (sequence: ZetaSequenceElement[]): void => {
@@ -155,7 +156,7 @@ const getSequenceNumberHtml = (value: ZetaSequenceElement): string => `<span cla
 const getSequenceFractionHtml = (fraction: ZetaSequenceFraction): string => {
     const { numerator, denominator, power } = fraction;
 
-    return `<span class="sequence-fraction" title="${calcZetaFraction(fraction)}">
+    return `<span class="sequence-fraction" title="${calcZetaFraction(fraction).toString()}">
         <span class="numerator-group"><span class="numerator-symbol">${numerator}</span></span>
         <span class="denominator-group">
             <span class="denominator-symbol">${denominator}</span>
