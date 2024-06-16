@@ -88,6 +88,7 @@ const handleOnBlurInputLength = (event: Event): void => {
     const value: string = inputPower.value;
 
     if (value.trim()) return;
+
     setInputValue(inputPower, zetaStore.currentLength);
 };
 
@@ -178,7 +179,7 @@ const outputSequence = (sequence: ZetaSequenceElement[]): void => {
     outputSequence!.innerHTML += '+ ...';
 };
 
-const getOutputSequenceHtml = (value: number): string => `<span class="title title-output-sequence">ζ(${value}) ⇒</span> `;
+const getOutputSequenceHtml = (value: number): string => `<span class="title title-output-sequence">ζ(${value}) ⇒ </span>`;
 
 const getSequenceNumberHtml = (value: ZetaSequenceElement): string => `<span class="sequence-number">${value}</span>`;
 
