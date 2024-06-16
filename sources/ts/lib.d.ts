@@ -1,5 +1,5 @@
 import { Dictionary, Nullable } from "./utils";
-import {Memy} from "./memy";
+import { Memy } from "./memy";
 
 export interface ZetaSequenceFraction {
     numerator: number;
