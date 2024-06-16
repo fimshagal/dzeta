@@ -25,5 +25,3 @@ export interface ZetaStore {
 export type ZetaSequenceElement = ZetaSequenceFraction | number;
 
 export type El$ = Dictionary<Nullable<HTMLElement>>;
-
-export type El$Names = ['inputPower', 'outputSequence', 'outputSum', 'inputLength', 'buttonExe'];
