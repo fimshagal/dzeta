@@ -1,0 +1,74 @@
+.zeta {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2vmax 0;
+}
+
+.output-sequence,
+.output-sum {
+    display: block;
+    margin-top: 2vmax;
+}
+
+.output-sequence {
+    font-size: 1.35em;
+}
+
+.output-sum {
+    font-size: 1.6em;
+    border-top: 1px dotted #a6a6a6;
+    padding-top: 1em;
+}
+
+.sequence-fraction,
+.sequence-number {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.sequence-fraction {
+    font-size: 0.85em;
+    display: inline-block;
+}
+
+.power-symbol {
+    font-size: 0.75em;
+}
+
+.power-symbol,
+.denominator-symbol {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.numerator-group,
+.denominator-group {
+    display: block;
+    text-align: center;
+}
+
+.numerator-group + .denominator-group {
+    border-top: 2px solid #000;
+}
+
+.form-group + .form-group {
+    margin-top: 1.5vmax;
+}
+
+.input-text {
+    border: 1px solid #676767;
+    padding: 0.35em 0.75em;
+}
+
+.button {
+    padding: 0.5em 1em;
+}
+
+.button-exe {
+    font-size: 1.1em;
+}
+
+.label {
+    font-weight: bold;
+}

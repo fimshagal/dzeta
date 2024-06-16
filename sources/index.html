@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>zeta</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="zeta" class="zeta">
+        <div id="mainForm" class="form form-main">
+            <div class="form-group form-group-input-power">
+                <label class="label" for="inputPower">Zeta (power):</label>
+                <input type="text" class="input-power input input-text" id="inputPower">
+            </div>
+            <div class="form-group form-group-input-length">
+                <label class="label" for="inputLength">Sequence length:</label>
+                <input type="text" class="input-length input input-text" id="inputLength">
+            </div>
+            <div class="form-group form-group-button-exe">
+                <button class="button button-exe" id="buttonExe">Show sequence and sum</button>
+            </div>
+        </div>
+
+        <output class="output-sequence" id="outputSequence"></output>
+        <output class="output-sum" id="outputSum"></output>
+    </div>
+    <script type="module" src="ts/index.ts"></script>
+</body>
+</html>
