@@ -101,7 +101,7 @@ const handleZeta = (zeta: number, length: number): void => {
 
     const sequence: ZetaSequenceElement[] = getZetaSequenceData(zeta, length);
     const memyEntry: Nullable<MemyEntry> | undefined = zetaStore.memy.getEntry([zeta, length]);
-    console.log(memyEntry);
+
     const sum: Big.Big = memyEntry
         ? new Big(Number(memyEntry.values[0]))
         : sumZetaSequence(sequence);
